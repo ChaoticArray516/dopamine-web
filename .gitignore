@@ -46,3 +46,8 @@ next-env.d.ts
 # opennext / cloudflare
 .open-next/
 .wrangler/
+
+# local analysis / logs
+*.log
+*.raw
+analyze.py
