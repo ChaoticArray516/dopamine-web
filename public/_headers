@@ -1,0 +1,6 @@
+# 静态资源 immutable 缓存
+# 依据: workspace/SEO_TECH_SPEC.md §2.7.4 + nextjs_cloudflare_constraints.md §5.3
+# next.config.ts 的 headers() 在 Cloudflare Workers 上不适用于 /_next/static 与 public/
+# 必须在此文件手动配置 immutable 缓存头
+/_next/static/*
+  Cache-Control: public,max-age=31536000,immutable
