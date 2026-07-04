@@ -1,36 +1,108 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dopamine Sites
+
+**Live site**: [https://dopamineweb.com](https://dopamineweb.com)
+
+A curated directory of websites, apps, and shopping destinations that deliver instant delight — from oddly satisfying sites and fake-shopping toys to Korean dopamine shopping guides.
+
+Built with **Next.js 15 App Router**, **React 19**, **TypeScript**, **Tailwind CSS v4**, and deployed to **Cloudflare Workers** via [`@opennextjs/cloudflare`](https://opennext.js.org/cloudflare).
+
+---
+
+## Tech Stack
+
+| Layer | Choice |
+|-------|--------|
+| Framework | Next.js 15.5.20 (App Router) |
+| React | 19.2.4 |
+| Language | TypeScript 5 (strict) |
+| Styling | Tailwind CSS v4 (CSS-first config) |
+| Content | contentlayer2 + MDX |
+| Fonts | Inter (sans), Poppins (display) via `next/font/google` |
+| SEO | Next.js Metadata API + JSON-LD `@graph` + sitemap + robots |
+| Deployment | Cloudflare Workers (`@opennextjs/cloudflare`) |
+| Package Manager | pnpm |
+
+---
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+cd workspace
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+> **Note**: Tailwind v4 uses CSS-first configuration in `src/app/globals.css`. If you modify `@theme inline` tokens, delete `.next/` and restart `pnpm dev` to regenerate utility classes.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Build & Deploy
 
-To learn more about Next.js, take a look at the following resources:
+### Local build
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+pnpm build
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Preview on Cloudflare Workers (local)
 
-## Deploy on Vercel
+```bash
+pnpm preview
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Deploy to production
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+pnpm deploy
+```
+
+> Requires Cloudflare credentials and `wrangler.jsonc` configuration. Do not commit API tokens or `.env*` files.
+
+---
+
+## Project Structure
+
+```
+workspace/
+├── content/
+│   ├── blog/          # MDX blog posts
+│   └── sites/         # MDX site reviews
+├── public/
+│   ├── _headers       # Cloudflare security headers
+│   └── ...            # Static assets
+├── src/
+│   ├── app/           # Next.js App Router routes
+│   ├── components/    # React components (ads, cards, layout, seo, etc.)
+│   └── lib/           # Utilities, config, content helpers
+├── contentlayer.config.ts
+├── next.config.ts
+├── open-next.config.ts
+├── wrangler.jsonc
+└── package.json
+```
+
+---
+
+## Content Clusters
+
+- **Dopamine Sites Directory** — oddly satisfying, fake shopping, interactive art, cozy
+- **Korean Dopamine Shopping** — YesStyle, StyleKorean, K-beauty hauls
+- **Dopamine Lifestyle** — room decor, aesthetic dressing, healthy routines
+
+---
+
+## SEO & Compliance
+
+- JSON-LD structured data rendered server-side for every route.
+- Sitemap generated at `/sitemap.xml`.
+- `robots.ts` blocks `/api/`, `/admin/`, and known AI crawlers.
+- Affiliate links use `rel="nofollow sponsored noopener noreferrer"`.
+- See [`COMPLIANCE_REPORT.md`](./COMPLIANCE_REPORT.md) for the full constraint audit.
+
+---
+
+## License
+
+© Dopamine Sites. All rights reserved.
